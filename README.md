@@ -190,59 +190,119 @@ async function getData() {
 }
 ```
 
-## Mini Project: To-Do List
+## Class and Object-Oriented Programming (OOP)
 
-Build a simple to-do list to apply what you’ve learned. The code is included in this repository.
+- Classes are blueprints for creating objects.
+- Use `class` keyword to define a class.
+- Constructor initializes object properties.
+
+```javascript
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  // instance method
+  greet() {
+    console.log(`Hello, my name is ${this.name}`);
+  }
+  // static class method
+  static species() {
+    return 'Homo sapiens';
+  }
+}
+// Create an instance of the class note the use of `new`
+const alice = new Person('Alice', 25);
+alice.greet(); // Hello, my name is Alice
+const bob = new Person('Bob', 30);
+bob.greet(); // Hello, my name is Bob
+
+// Using a static method is called on the class itself not on instances
+console.log(Person.species()); // Homo sapiens
+```
+
+## Mini Project Dice Game
+
+Build a simple dice game to apply what you’ve learned. The code is included in this repository.
+
 **HTML** (`index.html`)
 
 ```html
 <!DOCTYPE html>
 <html>
   <head>
-    <title>To-Do List</title>
-    <style>
-      .done {
-        text-decoration: line-through;
-      }
-    </style>
+    <title>JS Dice Game</title>
   </head>
   <body>
-    <input id="taskInput" placeholder="Add a task" />
-    <button id="addBtn">Add</button>
-    <ul id="taskList"></ul>
-    <script src="script.js"></script>
+    <h1>JS Dice Game</h1>
+    <script src="dice.js"></script>
   </body>
 </html>
 ```
 
-**JavaScript** (`script.js`)
+**JavaScript** (`dice.js`)
 
 ```javascript
-const input = document.querySelector('#taskInput');
-const addBtn = document.querySelector('#addBtn');
-const taskList = document.querySelector('#taskList');
+const rollDice = () => Math.floor(Math.random() * 6) + 1;
 
-addBtn.addEventListener('click', () => {
-  if (input.value.trim() === '') return;
-  const li = document.createElement('li');
-  li.textContent = input.value;
-  li.addEventListener('click', () => {
-    li.classList.toggle('done');
-  });
-  taskList.appendChild(li);
-  input.value = '';
-});
+const playGame = () => {
+  let player1Score = 0;
+  let player2Score = 0;
+
+  for (let i = 0; i < 5; i++) {
+    const player1Roll = rollDice();
+    const player2Roll = rollDice();
+    console.log(
+      `Round ${
+        i + 1
+      }: Player 1 rolled ${player1Roll}, Player 2 rolled ${player2Roll}`
+    );
+
+    if (player1Roll > player2Roll) {
+      player1Score++;
+      console.log('Player 1 wins this round!');
+    } else if (player2Roll > player1Roll) {
+      player2Score++;
+      console.log('Player 2 wins this round!');
+    } else {
+      console.log("It's a tie!");
+    }
+  }
+
+  console.log(
+    `Final Score: Player 1 - ${player1Score}, Player 2 - ${player2Score}`
+  );
+  if (player1Score > player2Score) {
+    console.log('Player 1 wins the game!');
+  } else if (player2Score > player1Score) {
+    console.log('Player 2 wins the game!');
+  } else {
+    console.log('The game is a tie!');
+  }
+};
+
+playGame();
 ```
 
-- **How it works**: Type a task, click “Add,” and click tasks to mark them done.
-- **Concepts used**: DOM manipulation, events, and basic styling.
-  **Try It**
-- Open `index.html` in a browser.
-- Add tasks and click them to toggle completion.
-- Inspect script.js to see how it works.
+**How it works**: The game simulates rolling two players rolling a dice for five rounds, keeping track of the scores and announcing the winner.
+
+## Conclusion
+
+Congratulations! You’ve learned the essentials of JavaScript in just 60 minutes. This crash course covered variables, data types, control flow, functions, arrays, objects, DOM manipulation, event handling, error handling, ES6+ features, and asynchronous JavaScript.
+You also built a simple dice game to apply your knowledge.
+
+## Additional Resources
+
+- [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
 ## What’s Next?
 
+- Explore more advanced topics like closures, prototypes, and ES6 modules.
+- Build more projects to solidify your understanding.
+- Join JavaScript communities (e.g., Stack Overflow, Reddit) for support and resources.
+- Follow JavaScript blogs and YouTube channels for updates and tutorials.
+- Read books like "Eloquent JavaScript" or "You Don’t Know JS" for deeper insights.
+- Experiment with JavaScript libraries and frameworks (e.g., React, Vue.js).
 - Practice on sites like freeCodeCamp or LeetCode.
 - Explore frameworks like React or Vue.js.
 - Learn Node.js for backend development.
